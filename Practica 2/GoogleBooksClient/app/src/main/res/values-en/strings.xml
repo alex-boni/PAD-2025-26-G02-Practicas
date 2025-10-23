@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="project_title">"Práctica 2 – Android: acceso a servicio remoto "</string>
+    <string name="search_books">Books</string>
+    <string name="search_magazines">Magazines</string>
+    <string name="search_both">Both</string>
+    <string name="setBookTitle">Enter Title</string>
+    <string name="setBookAutor">Enter Autor</string>
+    <string name="search">Search</string>
+</resources>
