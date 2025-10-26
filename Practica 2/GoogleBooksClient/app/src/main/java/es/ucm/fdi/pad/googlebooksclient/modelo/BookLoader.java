@@ -140,7 +140,7 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
         try {
             Uri builtURI = Uri.parse(BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, queryString)
-                    .appendQueryParameter(MAX_RESULTS, "20")
+                    .appendQueryParameter(MAX_RESULTS, "10")
                     .appendQueryParameter(PRINT_TYPE, printType)
                     .appendQueryParameter(API_KEY_PARAM, API_KEY)
                     .build();

@@ -19,6 +19,7 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
     public static final String EXTRA_QUERY_STRING = "extra_query";
     public static final String EXTRA_PRINT_TYPE = "extra_print_type";
 
+
     public BookLoaderCallbacks(MainActivity mainActivity) {
         myMainActivity = mainActivity;
     }
@@ -28,7 +29,7 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
     public Loader<List<BookInfo>> onCreateLoader(int id, @Nullable Bundle args) {
         String queryString = args.getString(EXTRA_QUERY_STRING);
         String printType = args.getString(EXTRA_PRINT_TYPE);
-        //myMainActivity.setSatusText("Cargando libros...");
+        myMainActivity.setStatusText("Cargando...");
         if (id == BOOK_LOADER_ID)
             return new BookLoader(myMainActivity, queryString, printType);
         else
@@ -37,21 +38,23 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<BookInfo>> loader, List<BookInfo> data) {
-        //myMainActivity.updateBooksResultList(null);
+        myMainActivity.updateBooksResultList(null);
         if(data!= null && !data.isEmpty()) {
-            //myMainActivity.setStatusText("Resultados");
-            //myMainActivity.updateBookList(data);
+            myMainActivity.setStatusText("Resultados");
+            myMainActivity.updateBooksResultList(data);
             Log.d("BookLoaderCallbacks", "Libros cargados: " + data.size());
         }else if (data != null && data.isEmpty()) {
-            //myMainActivity.setStatusText("No se han encontrado resultados.");
-            Log.d("BookLoaderCallbacks", "No se han encontrado resultados.");
-        } else
-            Log.d("BookLoaderCallbacks", "Error al cargar libros.");
+            myMainActivity.setStatusText("No se han encontrado resultados");
+            Log.d("BookLoaderCallbacks", "No se han encontrado resultados");
+        } else{
+            myMainActivity.setStatusText("Error de conexión");
+            Log.d("BookLoaderCallbacks", "Error al cargar libros");
+        }
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<BookInfo>> loader) {
-        //myMainActivity.updateBookList(null);
+        myMainActivity.updateBooksResultList(null);
         Log.d("BookLoaderCallbacks", "Loader reseteado.");
     }
 }
