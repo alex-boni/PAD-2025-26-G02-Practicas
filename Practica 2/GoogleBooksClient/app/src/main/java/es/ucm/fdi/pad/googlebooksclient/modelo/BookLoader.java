@@ -56,11 +56,30 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     @Nullable
     @Override
     public List<BookInfo> loadInBackground() {
-        String jsonResult = getBookInfoJson(queryString, printType);
-        if (jsonResult == null) {
-            return null;
+        if (printType == "all") {
+            String jsonResultBooks = getBookInfoJson(queryString, "books");
+            String jsonResultMagazines = getBookInfoJson(queryString, "magazines");
+            ArrayList<BookInfo> combinedResults = new ArrayList<>();
+            if (jsonResultBooks != null) {
+                List<BookInfo> books = parseJsonToBookList(jsonResultBooks);
+                if (books != null) {
+                    combinedResults.addAll(books);
+                }
+            }
+            if (jsonResultMagazines != null) {
+                List<BookInfo> magazines = parseJsonToBookList(jsonResultMagazines);
+                if (magazines != null) {
+                    combinedResults.addAll(magazines);
+                }
+            }
+            return combinedResults;
+        }else{
+            String jsonResult = getBookInfoJson(queryString, printType);
+            if (jsonResult == null) {
+                return null;
+            }
+            return parseJsonToBookList(jsonResult);
         }
-        return parseJsonToBookList(jsonResult);
     }
 
     /**
