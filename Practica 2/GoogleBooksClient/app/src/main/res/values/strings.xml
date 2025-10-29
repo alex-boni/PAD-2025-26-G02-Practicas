@@ -7,5 +7,9 @@
     <string name="setBookTitle">Introduce el Título</string>
     <string name="setBookAutor">Introduce Autor</string>
     <string name="search">Buscar</string>
-
+    <string name="status_loading">Cargando...</string>
+    <string name="status_no_results">No se han encontrado resultados</string>
+    <string name="status_results">Resultados</string>
+    <string name="status_error_conexion">Error de conexión</string>
+    <string name="req_bookTitle">Por favor, introduce título o autor</string>
 </resources>

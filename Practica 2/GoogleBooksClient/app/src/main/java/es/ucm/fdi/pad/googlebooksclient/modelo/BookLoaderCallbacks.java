@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import es.ucm.fdi.pad.googlebooksclient.R;
 
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
     public Loader<List<BookInfo>> onCreateLoader(int id, @Nullable Bundle args) {
         String queryString = args.getString(EXTRA_QUERY_STRING);
         String printType = args.getString(EXTRA_PRINT_TYPE);
-        myMainActivity.setStatusText("Cargando...");
+
+        myMainActivity.setStatusText(myMainActivity.getResources().getString(R.string.status_loading));
         if (id == BOOK_LOADER_ID)
             return new BookLoader(myMainActivity, queryString, printType);
         else
@@ -40,14 +42,14 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
     public void onLoadFinished(@NonNull Loader<List<BookInfo>> loader, List<BookInfo> data) {
         myMainActivity.updateBooksResultList(null);
         if(data!= null && !data.isEmpty()) {
-            myMainActivity.setStatusText("Resultados");
+            myMainActivity.setStatusText(myMainActivity.getResources().getString(R.string.status_results));
             myMainActivity.updateBooksResultList(data);
             Log.d("BookLoaderCallbacks", "Libros cargados: " + data.size());
         }else if (data != null && data.isEmpty()) {
-            myMainActivity.setStatusText("No se han encontrado resultados");
+            myMainActivity.setStatusText(myMainActivity.getResources().getString(R.string.status_no_results));
             Log.d("BookLoaderCallbacks", "No se han encontrado resultados");
         } else{
-            myMainActivity.setStatusText("Error de conexión");
+            myMainActivity.setStatusText(myMainActivity.getResources().getString(R.string.status_error_conexion));
             Log.d("BookLoaderCallbacks", "Error al cargar libros");
         }
     }

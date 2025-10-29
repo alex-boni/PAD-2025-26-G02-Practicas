@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity  {
         NetworkInfo networkInfo = (connMgr != null) ? connMgr.getActiveNetworkInfo() : null;
 
         if (networkInfo == null || !networkInfo.isConnected()) {
-            Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.status_error_conexion), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity  {
         Log.d("MainActivity", "Consulta de búsqueda: " + queryString + ", Tipo de impresión: " + printType);
 
         if (queryString.trim().isEmpty()) {
-            Toast.makeText(this, "Por favor, introduce un título o autor", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.req_bookTitle) , Toast.LENGTH_SHORT).show();
             return;
         }
 
