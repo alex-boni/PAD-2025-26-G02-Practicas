@@ -34,7 +34,7 @@ export default function App() {
                             <Link to="/" className="nav-link">Home</Link>
                         </div>
                         <div className='nav-middle'>
-                            <h1 className="app-title">Buscador de libros</h1>
+                            <h1 className="app-title">Buscador de Libros</h1>
                         </div>
                         <div className='nav-right'>
                             <button onClick={toggleTheme} className="theme-toggle">

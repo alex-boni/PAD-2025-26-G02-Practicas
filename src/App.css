@@ -17,11 +17,16 @@
   padding: 2rem;
 }
 
+.app-header {
+  background: var(--bg-secondary);
+}
+
 .app-footer {
   padding: 1.5rem;
   text-align: center;
   border-top: 1px solid var(--border-color);
   margin-top: auto;
+  background: var(--bg-secondary);
 }
 
 .app-footer p {
@@ -32,7 +37,7 @@
 .app-nav {
   display: flex;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem;
   border-bottom: 1px solid var(--border-color);
 }
 
