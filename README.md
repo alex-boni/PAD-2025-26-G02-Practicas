@@ -1,5 +1,4 @@
-# 🎡 Ruleta Student LTF - Gira sin Resistencias
-
+# Practica 3 - Google Books Client 
 <div align="center">
 
 ![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white)
@@ -7,8 +6,8 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1-38B2AC?logo=tailwind-css&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?logo=pwa&logoColor=white)
 
-
-[🚀 Demo](#) · [📖 Documentación](#instalación) · [🐛 Reportar Bug](../../issues)
+**Un buscador de libros moderno, rápido y capaz de funcionar sin conexión.**
+[🚀 Demo GH Pages](#githubPages)
 
 </div>
 
@@ -18,11 +17,9 @@
 
 - [✨ Características](#-características)
 - [🎯 Objetivo](#-objetivo)
-- [🎰 Sistema de Premios](#-sistema-de-premios)
 - [🛠️ Tecnologías](#️-tecnologías)
 - [📦 Instalación](#-instalación)
 - [🚀 Uso](#-uso)
-- [🎨 Personalización](#-personalización)
 - [📱 PWA](#-pwa)
 - [🤝 Contribuir](#-contribuir)
 - [📄 Licencia](#-licencia)
@@ -31,10 +28,21 @@
 
 ## ✨ Características
 
-
-
+- **🔍 Búsqueda en Tiempo Real:** Interfaz limpia para consultar la API de Google Books.
+- **🛡️ Validación de Formularios:** Gestión de errores visuales si se intenta buscar sin título.
+- **⚡ Feedback Visual:** Indicadores de estado de carga (`isLoading`) y manejo de errores de red.
+- **📱 Diseño Responsivo:** Grid adaptable (Móvil, Tablet, Desktop) utilizando Tailwind CSS.
+- **📦 Componentización:** Arquitectura modular con tarjetas de libros (`BookCard`) reutilizables.
+- **📶 PWA Offline-First:** Capacidad de instalación en escritorio/móviles y funcionamiento sin conexión gracias a Vite PWA Plugin.
 
 ---
+
+## 🎯 Objetivo
+
+El objetivo de este proyecto es desarrollar una **Single Page Application (SPA)** robusta que consuma servicio de Google Books, con capacidades progresivas (PWA) para garantizar una experiencia de usuario fluida y en condiciones de sin conexión de red para cumplir con los requisitos de la Práctica 3 de la asignatura de PAD 2025/26.
+
+---
+
 
 ## 🛠️ Tecnologías
 
@@ -49,7 +57,6 @@
 
 ### Herramientas de Desarrollo
 - **ESLint 9** - Linter con configuración flat config
-- **PostCSS** - Procesamiento de CSS
 
 ---
 
@@ -102,17 +109,24 @@
 ### Estructura del proyecto
 
 ```
-ruletaLTF/
+PAD-2025-26-G02-Practicas/
 ├── public/
-│   ├── manifest.webmanifest    # Configuración PWA
-│   └── icons/                  # Iconos de la aplicación
+│   ├── manifest.webmanifest    # Configuración de instalación PWA
+│   └── icons/                  # Iconos para distintos dispositivos
 ├── src/
-│   ├── App.jsx                 # Componente principal con lógica 
-│   ├── main.jsx                # Entry point, registra SW
-│   ├── index.css               # Estilos globales + Tailwind imports
-│   └── assets/                 # Recursos estáticos
-├── vite.config.js              # Configuración de Vite y PWA
-├── eslint.config.js            # Configuración de ESLint (flat config)
+│   ├── assets/                 # Imágenes y recursos estáticos
+│   ├── components/
+│   │   └── BookCard.jsx        # Componente para mostrar cada libro
+│   ├── pages/                  # (Opcional si usas routing)
+|   │   ├── Home.jsx                # Formulario y Pagina principal de búsqueda 
+|   │   ├── Home.css                # Estilos específicos de la Home
+│   │   └── homeService.js      # Lógica de fetch a la API
+│   ├── services/
+│   │   └── apiGoogleBooks.js      # Configuración de axions global.
+│   ├── App.jsx                 # Componente raíz
+│   ├── index.css               # Tailwind imports y estilos globales
+│   └── main.jsx                # Entry point y registro de SW
+├── vite.config.js              # Configuración Vite + Plugin PWA
 └── package.json
 ```
 
