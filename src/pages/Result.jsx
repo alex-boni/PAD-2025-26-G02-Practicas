@@ -21,9 +21,16 @@ export default function Result() {
                 setIsLoading(false);
                 return;
             }
-            
+
+            // Verificar conexión a internet
+            if (!navigator.onLine) {
+                setIsLoading(false);
+                setError("No tienes conexión a internet");
+                return;
+            }
+
             addSearchQuery(query);
-            
+
             setIsLoading(true);
             setError("");
             setHasMoreResults(true);
@@ -85,35 +92,36 @@ export default function Result() {
 
             {error && <p className="error-message">{error}</p>}
 
-            {isLoading ? (
-                <ul className="container max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {[...Array(12)].map((_, i) => <SkeletonCard key={i} />)}
-                </ul>
-            ) : books.length > 0 ? (
-                <div>
-                    <ul className={`container max-w-6xl mx-auto grid gap-6 ${
-                        books.length === 1 ? 'grid-cols-1' : books.length === 2 ? 'sm:grid-cols-2 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'
-                    }`}>
-                        {books.map((book) => (
-                            <BookCard
-                                key={book.id}
-                                title={book.volumeInfo.title}
-                                author={book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Autor desconocido"}
-                                publishedDate={book.volumeInfo.publishedDate || "Fecha desconocida"}
-                                link={book.volumeInfo.infoLink || "#"}
-                                onClick={() => onClick(book)} />
-                        ))}
+            {!error && (
+                isLoading ? (
+                    <ul className="container max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {[...Array(12)].map((_, i) => <SkeletonCard key={i} />)}
                     </ul>
-                    {hasMoreResults ? (
-                        <button onClick={handleLoadMore} className="load-more-button" disabled={isLoadingMore}>
-                            {isLoadingMore ? "Cargando..." : "Cargar más"}
-                        </button>
-                    ) : (
-                        <p className="no-more-results">No hay más resultados</p>
-                    )}
-                </div>
-            ) : (
-                <p className="no-results">No se encontraron libros.</p>
+                ) : books.length > 0 ? (
+                    <div>
+                        <ul className={`container max-w-6xl mx-auto grid gap-6 ${books.length === 1 ? 'grid-cols-1' : books.length === 2 ? 'sm:grid-cols-2 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'
+                            }`}>
+                            {books.map((book) => (
+                                <BookCard
+                                    key={book.id}
+                                    title={book.volumeInfo.title}
+                                    author={book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Autor desconocido"}
+                                    publishedDate={book.volumeInfo.publishedDate || "Fecha desconocida"}
+                                    link={book.volumeInfo.infoLink || "#"}
+                                    onClick={() => onClick(book)} />
+                            ))}
+                        </ul>
+                        {hasMoreResults ? (
+                            <button onClick={handleLoadMore} className="load-more-button" disabled={isLoadingMore}>
+                                {isLoadingMore ? "Cargando..." : "Cargar más"}
+                            </button>
+                        ) : (
+                            <p className="no-more-results">No hay más resultados</p>
+                        )}
+                    </div>
+                ) : (
+                    <p className="no-results">No se encontraron libros.</p>
+                )
             )}
         </div>
     );
