@@ -17,4 +17,10 @@
     box-shadow: var(--shadow);
     background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary), var(--bg-primary));
     transition-duration: 250ms;
+    cursor: pointer;
+}
+
+.book-card:has(.skeleton-title) {
+    cursor: default;
+    pointer-events: none;
 }

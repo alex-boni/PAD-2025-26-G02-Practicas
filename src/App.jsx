@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Result from './pages/Result';
 import Home from './pages/Home';
+import SearchHistory from './pages/SearchHistory';
 
 export default function App() {
     const [isDark, setIsDark] = useState(() => {
@@ -31,7 +32,8 @@ export default function App() {
                 <header className="app-header">
                     <nav className="app-nav">
                         <div className='nav-left'>
-                            <Link to="/" className="nav-link">Home</Link>
+                            <Link to="/" className="nav-link">Buscador</Link>
+                            <Link to="/history" className="nav-link">Historial</Link>
                         </div>
                         <div className='nav-middle'>
                             <h1 className="app-title">Buscador de Libros</h1>
@@ -49,6 +51,7 @@ export default function App() {
                 <main className="app-main">
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/history" element={<SearchHistory />} />
                         <Route path="/search" element={<Result />} />
                     </Routes>
                 </main>

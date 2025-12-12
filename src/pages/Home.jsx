@@ -1,20 +1,18 @@
 import { useState } from "react";
-import { searchBooks } from "./homeService"
+import { useNavigate } from "react-router-dom";
 import "./Home.css"
-import BookCard from "../components/BookCard"
+import BookCard from "../components/BookCard";
 
 export default function Home() {
-
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({ title: "" });
     const [errors, setErrors] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [books, setBooksResult] = useState([]);
 
     const validateForm = () => {
         const newErrors = {};
         let isValid = true;
-        if(!formData.title ){
-            newErrors.title = "El título es obligatorio";
+        if (!formData.title) {
+            newErrors.title = true;
             isValid = false;
         }
         setErrors(newErrors);
@@ -23,25 +21,11 @@ export default function Home() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if(!validateForm()){
-            const errorField = Object.keys(errors)[0];
-            if(errorField) document.getElementById(errorField).focus();
+        if (!validateForm()) {
+            document.getElementById("title").focus();
             return;
         }
-        setIsLoading(true);
-        try {
-            setErrors({});
-            // Limpiar resultados anteriores
-            setBooksResult([]);
-            // Llamada al servicio para buscar libros
-            const response = await searchBooks(formData.title);
-            setBooksResult(response);
-        } catch (error) {
-            console.error(error.message);
-            setErrors({ submit: "Error al buscar libros" });
-        } finally {
-            setIsLoading(false);
-        }
+        navigate(`/search?title=${encodeURIComponent(formData.title)}`);
     }
 
     return (
@@ -49,39 +33,34 @@ export default function Home() {
             <h2>Bienvenido al Buscador de Libros</h2>
             <p>Utiliza la barra de búsqueda para encontrar tus libros favoritos.</p>
             <form onSubmit={handleSubmit} className="book-search">
-                {errors.submit && <p className="text-sm text-red-600" aria-live="assertive">{errors.submit}</p>}
                 <input
                     id="title"
                     value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="book-search-input"
+                    onChange={(e) => {
+                        setFormData({ ...formData, title: e.target.value });
+                        setErrors({ ...errors, title: '' });
+                    }}
+                    className={`book-search-input ${errors.title ? 'input-error' : ''}`}
                     placeholder="Introduce el título del libro..."
                 />
-                {errors.title && <p className="text-sm text-red-600" aria-live="assertive">{errors.title}</p>}
-                <button type="submit" className="book-search-button"
-                disabled={isLoading}>
-                    {isLoading ? (
-                        <p>Cargando...</p>
-                    ) : ('Buscar')}
+                <button type="submit" className="book-search-button">
+                    Buscar
                 </button>
-
             </form>
 
-            <h2>Historial de Búsqueda</h2>
-            {books.length > 0 ? (
-                <ul className="container max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {books.map((book) => (
+            <h2>Últimos 5 libros accedidos</h2>
+            {(JSON.parse(localStorage.getItem("history")) || []).length === 0 ? (
+                <p className="text-center text-gray-500">No hay historial de búsquedas</p>
+            ) : (
+                <ul className="container max-w-6xl mx-auto grid gap-6">
+                    {(JSON.parse(localStorage.getItem("history")) || []).map((book) => (
                         <BookCard
-                            key={book.id}
-                            title={book.volumeInfo.title}
-                            author={book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Autor desconocido"}
-                            publishedDate={book.volumeInfo.publishedDate || "Fecha desconocida"}
-                            link={book.volumeInfo.infoLink || "#"}
-                        />
+                            title={book.title}
+                            author={book.authors ? book.authors.join(", ") : "Autor desconocido"}
+                            publishedDate={book.publishedDate || "Fecha desconocida"}
+                            link={book.infoLink || "#"} />
                     ))}
                 </ul>
-            ) : (
-                <p>No se encontraron libros.</p>
             )}
         </div>
     )

@@ -32,10 +32,21 @@
     color: var(--text-tertiary);
 }
 
-.book-search-input:focus {
+.book-search-input:focus:not(.input-error) {
     outline: none;
-    box-shadow: 0 0 0 2px var(--color-primary), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px var(--color-primary), var(--shadow);
     transform: scale(1.05);
+}
+
+.book-search-input.input-error {
+    border-color: var(--color-danger);
+}
+
+.book-search-input.input-error:focus {
+    outline: none;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px var(--color-danger), var(--shadow);
+
 }
 
 .book-search-button {

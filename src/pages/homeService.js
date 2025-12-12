@@ -1,12 +1,13 @@
 import apiGoogleBooks from "../services/apiGoogleBooks"
 
 
-export const searchBooks = async (titulo) => {
+export const searchBooks = async (titulo, startIndex = 0) => {
     try {
         const response = await apiGoogleBooks.get("", {
             params: {
                 q: titulo,
-                maxResults: 10, 
+                maxResults: 12,
+                startIndex: startIndex,
                 printType: "books",
             },
         });
