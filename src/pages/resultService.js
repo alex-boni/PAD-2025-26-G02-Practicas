@@ -1,14 +1,33 @@
+import apiGoogleBooks from "../services/apiGoogleBooks"
+
+export const searchBooks = async (titulo, startIndex = 0) => {
+    try {
+        const response = await apiGoogleBooks.get("", {
+            params: {
+                q: titulo,
+                maxResults: 12,
+                startIndex: startIndex,
+                printType: "books",
+            },
+        });
+        return response.data.items || [];
+    } catch (error) {
+        console.error("Error fetching books:", error);
+        return [];
+    }
+}
+
 export const saveBookToHistory = (book) => {
     const history = JSON.parse(localStorage.getItem("history")) || [];
-    
+
     // Limitar a 5 libros en el historial
     if (history.length >= 5) {
         history.pop();
     }
-    
+
     // Evitar duplicados - si ya existe, mover al inicio
     const filtered = history.filter(item => item.id !== book.id);
-    
+
     // Agregar el nuevo libro al inicio
     filtered.unshift({
         id: book.id,
@@ -17,7 +36,7 @@ export const saveBookToHistory = (book) => {
         publishedDate: book.volumeInfo.publishedDate,
         infoLink: book.volumeInfo.infoLink
     });
-    
+
     localStorage.setItem("history", JSON.stringify(filtered));
 };
 
