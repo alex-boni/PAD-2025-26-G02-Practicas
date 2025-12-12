@@ -35,7 +35,7 @@ export default function App() {
     };
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/PAD-2025-26-G02-Practicas/'>
             <div className="app-container">
 
                 {/* HEADER/NAVEGACIÓN */}
