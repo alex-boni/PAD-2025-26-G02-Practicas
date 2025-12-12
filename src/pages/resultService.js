@@ -25,7 +25,7 @@ export const saveBookToHistory = (book) => {
         history.pop();
     }
 
-    // Evitar duplicados - si ya existe, mover al inicio
+    // Quitar el libro si ya existía (para moverlo al inicio)
     const filtered = history.filter(item => item.id !== book.id);
 
     // Agregar el nuevo libro al inicio
