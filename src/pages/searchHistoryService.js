@@ -21,7 +21,3 @@ export const deleteSearchQuery = (index) => {
 export const deleteAllSearchQueries = () => {
     localStorage.setItem(SEARCH_QUERIES_KEY, JSON.stringify([]));
 };
-
-export const clearSearchHistory = () => {
-    deleteAllSearchQueries();
-};

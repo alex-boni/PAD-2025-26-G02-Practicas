@@ -11,6 +11,8 @@ export default function App() {
         return savedTheme === 'dark';
     });
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     useEffect(() => {
         if (isDark) {
             document.documentElement.classList.add('dark');
@@ -24,6 +26,14 @@ export default function App() {
         setIsDark(!isDark);
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
     return (
         <BrowserRouter>
             <div className="app-container">
@@ -32,6 +42,11 @@ export default function App() {
                 <header className="app-header">
                     <nav className="app-nav">
                         <div className='nav-left'>
+                            <button onClick={toggleMenu} className="hamburger-menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
                             <Link to="/" className="nav-link">Buscador</Link>
                             <Link to="/history" className="nav-link">Historial</Link>
                         </div>
@@ -45,6 +60,14 @@ export default function App() {
                         </div>
 
                     </nav>
+
+                    {/* MENÚ DESPLEGABLE PARA MÓVIL */}
+                    {isMenuOpen && (
+                        <div className="mobile-menu active">
+                            <Link to="/" className="mobile-menu-link" onClick={closeMenu}>Buscador</Link>
+                            <Link to="/history" className="mobile-menu-link" onClick={closeMenu}>Historial</Link>
+                        </div>
+                    )}
                 </header>
 
                 {/* CONTENIDO DINÁMICO */}
