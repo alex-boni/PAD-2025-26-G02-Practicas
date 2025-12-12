@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { searchBooks } from "./homeService";
+import { searchBooks } from "./resultService";
 import { addSearchQuery } from "./searchHistoryService";
 import BookCard, { SkeletonCard } from "../components/BookCard"
 import "./Result.css";

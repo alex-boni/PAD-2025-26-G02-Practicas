@@ -1,4 +1,4 @@
-import apiGoogleBooks from "../services/apiGoogleBooks"
+import apiGoogleBooks from "../external-apis/apiGoogleBooks"
 
 export const searchBooks = async (titulo, startIndex = 0) => {
     try {

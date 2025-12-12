@@ -1,11 +1,5 @@
 import "./BookCard.css"
-type Book = {
-    title: string;
-    author: string;
-    publishedDate: string;
-    link: string;
-    onClick?: () => void;
-};
+
 
 export function SkeletonCard() {
     return (
@@ -17,7 +11,7 @@ export function SkeletonCard() {
     );
 }
 
-export default function BookCard(book: Book) {
+export default function BookCard(book) {
     return (
         <li className="book-card" onClick={book.onClick ?? (() => window.open(book.link, "_blank"))}>
             <h3>{book.title}</h3>
