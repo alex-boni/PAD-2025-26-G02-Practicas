@@ -19,7 +19,8 @@ export default defineConfig({
       manifest: {
         name: "Google Books Client",
         short_name: "BooksClient",
-        start_url: "/",
+        start_url: "/PAD-2025-26-G02-Practicas/",
+        scope: "/PAD-2025-26-G02-Practicas/",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#4f46e5",
