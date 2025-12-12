@@ -1,3 +1,4 @@
+'use client';
 import axios from "axios";
 const BASE_URL = "https://www.googleapis.com/books/v1/volumes";
 
@@ -12,7 +13,7 @@ const apiGoogleBooks = axios.create({
 
 // Interceptor para agregar la clave de API a cada solicitud
 apiGoogleBooks.interceptors.request.use((config) => {
-  const apiKey = import.meta.env.VITE_API_KEY_GOOGLE_BOOKS;
+  const apiKey = process.env.API_KEY_GOOGLE_BOOKS;
   if (apiKey) {
     config.params = config.params || {};
     config.params.key = apiKey;

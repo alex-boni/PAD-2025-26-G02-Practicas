@@ -1,11 +1,6 @@
 import "./BookCard.css"
-type Book = {
-    title: string;
-    author: string;
-    publishedDate: string;
-    link: string;
-};
-export default function BookCard(book: Book) {
+
+export default function BookCard(book) {
     return (
         <a href={book.link}>
             <li className="book-card">

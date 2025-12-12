@@ -1,11 +1,6 @@
 # Practica 3 - Google Books Client 
 <div align="center">
 
-![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?logo=vite&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1-38B2AC?logo=tailwind-css&logoColor=white)
-![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?logo=pwa&logoColor=white)
-
 **Un buscador de libros moderno, rápido y capaz de funcionar sin conexión.**
 [🚀 Demo GH Pages](#githubPages)
 
@@ -30,7 +25,7 @@
 
 - **🔍 Búsqueda en Tiempo Real:** Interfaz limpia para consultar la API de Google Books.
 - **🛡️ Validación de Formularios:** Gestión de errores visuales si se intenta buscar sin título.
-- **⚡ Feedback Visual:** Indicadores de estado de carga (`isLoading`) y manejo de errores de red.
+- **⚡ Feedback Visual:** Indicadores de estado de carga (`isLoading, setIsLoading`) y manejo de errores de red (`errors, setErrors`).
 - **📱 Diseño Responsivo:** Grid adaptable (Móvil, Tablet, Desktop) utilizando Tailwind CSS.
 - **📦 Componentización:** Arquitectura modular con tarjetas de libros (`BookCard`) reutilizables.
 - **📶 PWA Offline-First:** Capacidad de instalación en escritorio/móviles y funcionamiento sin conexión gracias a Vite PWA Plugin.
@@ -47,8 +42,7 @@ El objetivo de este proyecto es desarrollar una **Single Page Application (SPA)*
 ## 🛠️ Tecnologías
 
 ### Frontend
-- **React 19.2** - Biblioteca UI con hooks modernos
-- **Vite 7.2** - Build tool ultra-rápido con HMR
+- **Nextjs 16.0.7** - Framework de React
 - **Tailwind CSS 4.1** - Utility-first CSS framework
 
 ### PWA
